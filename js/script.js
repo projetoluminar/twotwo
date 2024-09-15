@@ -1,28 +1,75 @@
-const dialogWrapper = document.querySelectorAll('[data-modal="dialog--wrapper"]');
-const closeWrapperButton = document.querySelectorAll('[data-modal="close--wrapper"]')
-const serviceCardButton = document.querySelectorAll('[data-modal="open--wrapper"]');
+// const carouselItem = document.querySelectorAll('.carouselWrapper li');
+// const carouselWrapper = document.querySelector('.carouselWrapper');
+// const stepper = document.querySelectorAll('.carouselStep button');
+// const carouselWrapperWidth = carouselWrapper.offsetWidth;
+
+// stepper.forEach((item) => {
+//     item.addEventListener('click', function() {
+//         carouselItem.forEach((item) => {
+//             item.style.transform += 'translateX(-200px)';
+//         })
+//     })
+// })
+
+// const btn = document.querySelectorAll('[data-btn]');
+// const carouselWrapper = document.querySelector('.carouselWrapper')
+// const carouselItem = document.querySelectorAll('.carouselWrapper li');
+// let carouselWrapperWidth = carouselWrapper.offsetWidth;
+
+// window.addEventListener('resize', reportResize)
+
+// function reportResize() {
+//     let carouselWrapperWidth = carouselWrapper.offsetWidth;
+//     return carouselWrapperWidth
+// }
+
+// btn.forEach((item) => {
+//     item.addEventListener('click', () => {
+//         const btnActionType = item.getAttribute('data-btn')
+//         if (btnActionType === 'next') {
+//             carouselItem.forEach((carouselElement) => {
+//                 carouselElement.style.transform += `translate3d(-${carouselWrapperWidth}px,0,0)`
+//             })
+//         } else {
+//             carouselItem.forEach((carouselElement) => {
+//                 carouselElement.style.transform += `translate3d(${carouselWrapperWidth}px,0,0)`
+//             })
+//         }
+//     })
+// })
 
 
-function activeWrapper(index) {
-    dialogWrapper.forEach((modal) => {
-        modal.classList.remove('open')
+const carousel = document.querySelector('.carousel');
+const slides = document.querySelectorAll('.case');
+const prevButton = document.querySelector('[data-action="back"]');
+const nextButton = document.querySelector('[data-action="next"]');
+const steps = document.querySelectorAll('.carouselSteps li');
+
+let currentIndex = 0;
+
+function showSlide(index) {
+    if (index < 0) {
+        currentIndex = slides.length - 1; // wrap around to the last slide
+    } else if (index >= slides.length) {
+        currentIndex = 0; // wrap around to the first slide
+    } else {
+        currentIndex = index;
+    }
+    carousel.style.transform = `translate3d(-${currentIndex * 100}% ,0 ,0)`;
+
+    steps.forEach((item, index) => {
+        if (index === currentIndex) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active')
+        }
     })
-    dialogWrapper[index].classList.add('open')
 }
 
-serviceCardButton.forEach((element, index) => {
-    element.addEventListener('click', (event) => {
-        event.preventDefault();
-        activeWrapper(index);
-    });
+prevButton.addEventListener('click', () => {
+    showSlide(currentIndex - 1);
 });
 
-function closeWrapper(index) {
-    dialogWrapper[index].classList.remove('open');
-}
-
-closeWrapperButton.forEach((element, index) => {
-    element.addEventListener('click', () => {
-        closeWrapper(index);
-    });
-})
+nextButton.addEventListener('click', () => {
+    showSlide(currentIndex + 1);
+});
