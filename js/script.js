@@ -73,3 +73,30 @@ prevButton.addEventListener('click', () => {
 nextButton.addEventListener('click', () => {
     showSlide(currentIndex + 1);
 });
+
+
+/* Scroll */
+const mobileMenu = document.querySelector('[data-status]');
+const closeMobileMenu = document.querySelector('.closeButton');
+const buttonMobileMenu = document.querySelector('.btnMenuMobile');
+
+buttonMobileMenu.addEventListener('click', (e) => {
+    const status = mobileMenu.getAttribute('data-status');
+
+    if (status === 'active') {
+        mobileMenu.setAttribute('data-status', 'inactive');
+    } else {
+        mobileMenu.setAttribute('data-status', 'active');
+    }  
+})
+
+closeMobileMenu.addEventListener('click', (e) => {
+    const status = mobileMenu.getAttribute('data-status');
+
+    if (status === 'active') {
+        mobileMenu.setAttribute('data-status', 'inactive');
+    } else {
+        mobileMenu.setAttribute('data-status', 'active');
+    }    
+})
+
