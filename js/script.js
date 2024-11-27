@@ -44,6 +44,7 @@ buttonMobileMenu.addEventListener('click', (e) => {
 
     if (status === 'active') {
         mobileMenu.setAttribute('data-status', 'inactive');
+
     } else {
         mobileMenu.setAttribute('data-status', 'active');
     }  
@@ -76,6 +77,7 @@ mobileMenuLinks.forEach((link) => {
 
 const serviceButtonList = document.querySelectorAll('.serviceButton');
 const modalList = document.querySelectorAll('.backgroundModal');
+const modalWrapperList = document.querySelectorAll('.servicesModalWrapper');
 const closeModalButtonList = document.querySelectorAll('.closeModalButton');
 const servicesModalList = document.querySelectorAll('.servicesModalWrapper');
 
@@ -83,15 +85,26 @@ function toggleClass(elementList, index) {
     elementList[index].classList.toggle('open');
 }
 
+modalList.forEach((modal, index) => {
+    modal.addEventListener('click', () => {
+        if(event.target == modal) {
+            toggleClass(modalList, index);
+            document.body.style.overflow = 'auto'; // This able page scroll
+        }
+    })
+});
+
 serviceButtonList.forEach((button, index) => {
     button.addEventListener('click', (event) => {
         event.preventDefault();
         toggleClass(modalList, index);
+        document.body.style.overflow = 'hidden'; // This disable page scroll
     })
 })
 
 closeModalButtonList.forEach((button, index) => {
     button.addEventListener('click', () => {
         toggleClass(modalList, index);
+        document.body.style.overflow = 'auto'; // This able page scroll
     });
 })
