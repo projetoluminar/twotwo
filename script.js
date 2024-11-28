@@ -53,7 +53,6 @@ buttonMobileMenu.addEventListener('click', (e) => {
 
     } else {
         mobileMenu.setAttribute('data-status', 'active');
-        document.body.addEventListener('touchmove', disableTouchScroll, {passive: false});
     }  
 })
 
@@ -62,7 +61,6 @@ closeMobileMenu.addEventListener('click', (e) => {
 
     if (status === 'active') {
         mobileMenu.setAttribute('data-status', 'inactive');
-        document.body.removeEventListener('touchmove', disableTouchScroll, {passive: false});
 
     } else {
         mobileMenu.setAttribute('data-status', 'active');
@@ -76,7 +74,7 @@ mobileMenuLinks.forEach((link) => {
         const status = mobileMenu.getAttribute('data-status');
         if (status === 'active') {
             mobileMenu.setAttribute('data-status', 'inactive');
-            document.body.removeEventListener('touchmove', disableTouchScroll, {passive: false});
+
         } else {
             mobileMenu.setAttribute('data-status', 'active');
         }
