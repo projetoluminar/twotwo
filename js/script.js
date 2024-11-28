@@ -62,7 +62,7 @@ closeMobileMenu.addEventListener('click', (e) => {
 
     if (status === 'active') {
         mobileMenu.setAttribute('data-status', 'inactive');
-        document.body.removeEventListener('touchmove', disableTouchScroll, {passive: false});
+        document.body.removeEventListener('touchmove', disableTouchScroll, {passive: false}); // This able page scroll with touch
 
     } else {
         mobileMenu.setAttribute('data-status', 'active');
@@ -76,6 +76,7 @@ mobileMenuLinks.forEach((link) => {
         const status = mobileMenu.getAttribute('data-status');
         if (status === 'active') {
             mobileMenu.setAttribute('data-status', 'inactive');
+
         } else {
             mobileMenu.setAttribute('data-status', 'active');
         }
