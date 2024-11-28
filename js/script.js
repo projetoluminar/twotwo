@@ -39,6 +39,12 @@ const mobileMenu = document.querySelector('[data-status]');
 const closeMobileMenu = document.querySelector('.closeButton');
 const buttonMobileMenu = document.querySelector('.btnMenuMobile');
 
+
+// This function disable default touch behavior 
+function disableTouchScroll(event) {
+    event.preventDefault(); 
+}
+
 buttonMobileMenu.addEventListener('click', (e) => {
     const status = mobileMenu.getAttribute('data-status');
 
@@ -47,6 +53,7 @@ buttonMobileMenu.addEventListener('click', (e) => {
 
     } else {
         mobileMenu.setAttribute('data-status', 'active');
+        document.body.addEventListener('touchmove', disableTouchScroll, {passive: false});
     }  
 })
 
@@ -55,6 +62,8 @@ closeMobileMenu.addEventListener('click', (e) => {
 
     if (status === 'active') {
         mobileMenu.setAttribute('data-status', 'inactive');
+        document.body.removeEventListener('touchmove', disableTouchScroll, {passive: false});
+
     } else {
         mobileMenu.setAttribute('data-status', 'active');
     }    
@@ -90,6 +99,7 @@ modalList.forEach((modal, index) => {
         if(event.target == modal) {
             toggleClass(modalList, index);
             document.body.style.overflow = 'auto'; // This able page scroll
+            document.body.removeEventListener('touchmove', disableTouchScroll, {passive: false}); // This able page scroll with touch
         }
     })
 });
@@ -99,6 +109,7 @@ serviceButtonList.forEach((button, index) => {
         event.preventDefault();
         toggleClass(modalList, index);
         document.body.style.overflow = 'hidden'; // This disable page scroll
+        document.body.addEventListener('touchmove', disableTouchScroll, {passive: false}); // This disable page scroll with touch
     })
 })
 
@@ -106,5 +117,6 @@ closeModalButtonList.forEach((button, index) => {
     button.addEventListener('click', () => {
         toggleClass(modalList, index);
         document.body.style.overflow = 'auto'; // This able page scroll
+        document.body.removeEventListener('touchmove', disableTouchScroll, {passive: false}); // This able page scroll with touch
     });
 })
